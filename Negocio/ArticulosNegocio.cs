@@ -115,5 +115,83 @@ namespace Negocio
                 throw ex;
             }
         }
+        public List<Articulos> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulos> lista = new List<Articulos>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "select A.Id,Codigo,Nombre,A.Descripcion,ImagenUrl,Precio,M.Descripcion As Marca,C.Descripcion As Categoria,A.IdMarca,A.IdCategoria from ARTICULOS A,MARCAS M,CATEGORIAS C where A.IdMarca=M.Id And A.IdCategoria=C.Id And ";
+                if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "Nombre like '" + filtro + "%' ";
+                            break;
+                        case "Termina con":
+                            consulta += "Nombre like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "Nombre like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Descripción")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "A.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "Termina con":
+                            consulta += "A.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Marca")
+                {
+                    consulta += "M.Descripcion = '" + criterio + "'";
+                }
+                else
+                {
+                    consulta += "C.Descripcion = '" + criterio + "'";
+                }
+
+
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+
+                while (datos.Lector.Read())
+                {
+                    Articulos aux = new Articulos();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Precio = (decimal)(datos.Lector["Precio"]);
+                    aux.Marca = new Marcas();
+                    aux.Marca.Id = (int)(datos.Lector["IdMarca"]);
+                    aux.Marca.Descripcion = (string)(datos.Lector["Marca"]);
+                    aux.Categoria = new Categorias();
+                    aux.Categoria.Id = (int)(datos.Lector["IdCategoria"]);
+                    aux.Categoria.Descripcion = (string)(datos.Lector["Categoria"]);
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

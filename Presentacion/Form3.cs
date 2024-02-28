@@ -22,6 +22,13 @@ namespace Presentacion
         private void frmAvanzado_Load(object sender, EventArgs e)
         {
             cargar();
+
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Descripción");
+            cboCampo.Items.Add("Marca");
+            cboCampo.Items.Add("Categoría");
+            cboCampo.SelectedIndex = 0; // con esto preselecciono el primero elemento del combo box
+            cboCriterio.SelectedIndex = 0;
         }
         private void cargar()
         {
@@ -70,6 +77,76 @@ namespace Presentacion
             }
         }
 
-        
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //
+            MarcasNegocio marcasNegocio = new MarcasNegocio();
+            CategoriasNegocio categoriasNegocio = new CategoriasNegocio();
+            string opcion = cboCampo.SelectedItem.ToString();
+            if (opcion == "Nombre")
+            {
+                cboCriterio.DataSource = null; // Limpiar DataSource primero
+                cboCriterio.Items.Clear(); // Luego limpiar los Items , necesito ésto para que no se rompa el programa por los DataSource que utilizo luego
+                cboCriterio.Items.Add("Contiene");
+            }
+            else if (opcion == "Descripción")
+            {
+                cboCriterio.DataSource = null;
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+            else if (opcion == "Marca")
+            {
+                cboCriterio.DataSource = marcasNegocio.listar();
+                cboCriterio.DisplayMember = "Marca";
+            }
+            else
+            {
+                cboCriterio.DataSource = categoriasNegocio.listar();
+                cboCriterio.DisplayMember = "Categoria";
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticulosNegocio negocio = new ArticulosNegocio();
+            try
+            {
+                if (validarFiltro())
+                    return;
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvDatosAvanzados.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+        private bool validarFiltro()
+        {
+
+            if (cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar");
+                return true;
+            }
+            return false;
+        }
+        private bool soloNumeros(string cadena)
+        {
+            foreach (char c in cadena)
+            {
+                if (!(char.IsNumber(c)))
+                    return false;
+            }
+            return true;
+        }
     }
 }

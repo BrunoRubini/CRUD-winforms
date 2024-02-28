@@ -39,7 +39,7 @@ namespace Presentacion
                 listaArticulos = negocio.listar();
                 dgvDatos.DataSource = listaArticulos;
                 ocultarColumnas();
-                cargarImagen(listaArticulos[0].ImagenUrl);
+                //cargarImagen(listaArticulos[0].ImagenUrl);
             }
             catch (Exception ex)
             {
@@ -49,18 +49,7 @@ namespace Presentacion
 
 
         }
-        public void cargarImagen(string imagen)
-        {
-            // por si no hay imagen en la bd, para que no falle el programa cargo una imagen desde la web
-            try
-            {
-                pbxArticulo.Load(imagen);
-            }
-            catch (Exception ex)
-            {
-                pbxArticulo.Load("https://imgs.search.brave.com/Jp6ngmaC-F_2y5_7UN2IF8HtgALS20IY1-qn-o5x8EA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzI5LzQyLzQy/LzM2MF9GXzQyOTQy/NDI3OV9kb2tFRndu/U29KZU9LcHF2VjF0/dFh1bThwaUVTc0Y1/TC5qcGc");
-            }
-        }
+       
         private void ocultarColumnas()
         {
             dgvDatos.Columns["ImagenUrl"].Visible = false;
@@ -68,14 +57,7 @@ namespace Presentacion
 
         }
 
-        private void dgvDatos_SelectionChanged(object sender, EventArgs e)
-        { // Con SelectionChanged actualizo la imagen cuando hago click en otro articulo en el dgv
-            if (dgvDatos.CurrentRow != null)
-            {
-                Articulos seleccionado = (Articulos)dgvDatos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.ImagenUrl);
-            }
-        }
+       
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -122,9 +104,10 @@ namespace Presentacion
 
         private void txtBuscarArticulo_Enter(object sender, EventArgs e)
         {
-            if (txtBuscarArticulo.Text == "Buscar Artículo")
+            if (txtBuscarArticulo.Text == "Ingrese nombre, marca o categoría")
                 txtBuscarArticulo.Text = "";
         }
+        
 
         private void txtBuscarArticulo_TextChanged(object sender, EventArgs e)
         {
@@ -132,7 +115,7 @@ namespace Presentacion
             string filtro = txtBuscarArticulo.Text;
             if (filtro.Length >= 3)
             {
-                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()) || x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper()));
             }
             else
             {

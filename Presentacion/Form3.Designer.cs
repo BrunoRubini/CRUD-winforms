@@ -35,6 +35,9 @@
             this.dgvDatosAvanzados = new System.Windows.Forms.DataGridView();
             this.lblListaArticulos = new System.Windows.Forms.Label();
             this.cboCampo = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cboCriterio = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.txtFiltroAvanzado = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnBuscar = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAvanzado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosAvanzados)).BeginInit();
             this.SuspendLayout();
@@ -111,10 +114,60 @@
             this.cboCampo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboCampo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboCampo.ItemHeight = 30;
-            this.cboCampo.Location = new System.Drawing.Point(106, 242);
+            this.cboCampo.Location = new System.Drawing.Point(44, 242);
             this.cboCampo.Name = "cboCampo";
             this.cboCampo.Size = new System.Drawing.Size(140, 36);
             this.cboCampo.TabIndex = 3;
+            this.cboCampo.SelectedIndexChanged += new System.EventHandler(this.cboCampo_SelectedIndexChanged);
+            // 
+            // cboCriterio
+            // 
+            this.cboCriterio.BackColor = System.Drawing.Color.Transparent;
+            this.cboCriterio.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCriterio.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCriterio.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboCriterio.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboCriterio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboCriterio.ItemHeight = 30;
+            this.cboCriterio.Location = new System.Drawing.Point(238, 242);
+            this.cboCriterio.Name = "cboCriterio";
+            this.cboCriterio.Size = new System.Drawing.Size(140, 36);
+            this.cboCriterio.TabIndex = 4;
+            // 
+            // txtFiltroAvanzado
+            // 
+            this.txtFiltroAvanzado.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtFiltroAvanzado.DefaultText = "";
+            this.txtFiltroAvanzado.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtFiltroAvanzado.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtFiltroAvanzado.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtFiltroAvanzado.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtFiltroAvanzado.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtFiltroAvanzado.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtFiltroAvanzado.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtFiltroAvanzado.Location = new System.Drawing.Point(425, 242);
+            this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
+            this.txtFiltroAvanzado.PasswordChar = '\0';
+            this.txtFiltroAvanzado.PlaceholderText = "";
+            this.txtFiltroAvanzado.SelectedText = "";
+            this.txtFiltroAvanzado.Size = new System.Drawing.Size(200, 36);
+            this.txtFiltroAvanzado.TabIndex = 5;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnBuscar.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnBuscar.ForeColor = System.Drawing.Color.White;
+            this.btnBuscar.Location = new System.Drawing.Point(665, 242);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(153, 36);
+            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // frmAvanzado
             // 
@@ -122,6 +175,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(941, 450);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.txtFiltroAvanzado);
+            this.Controls.Add(this.cboCriterio);
             this.Controls.Add(this.cboCampo);
             this.Controls.Add(this.lblListaArticulos);
             this.Controls.Add(this.dgvDatosAvanzados);
@@ -142,5 +198,8 @@
         private System.Windows.Forms.DataGridView dgvDatosAvanzados;
         private System.Windows.Forms.Label lblListaArticulos;
         private Guna.UI2.WinForms.Guna2ComboBox cboCampo;
+        private Guna.UI2.WinForms.Guna2ComboBox cboCriterio;
+        private Guna.UI2.WinForms.Guna2TextBox txtFiltroAvanzado;
+        private Guna.UI2.WinForms.Guna2Button btnBuscar;
     }
 }
