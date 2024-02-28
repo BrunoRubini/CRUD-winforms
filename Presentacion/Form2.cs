@@ -28,9 +28,12 @@ namespace Presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-
             try
             {
+                if (!ValidarCampos())
+                {
+                    return;
+                }
                 ArticulosNegocio articulosNegocio = new ArticulosNegocio();
                 articulo = new Articulos();
                 articulo.Codigo = txtCodigo.Text;
@@ -40,18 +43,36 @@ namespace Presentacion
                 articulo.Marca = (Marcas)cboMarca.SelectedItem;
                 articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
+
                 articulosNegocio.agregar(articulo);
-                MessageBox.Show("Agregado Exitosamente");
+                MessageBox.Show("Artículo agregado exitosamente");
                 Close();
 
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                MessageBox.Show("Ha ocurrido un error: " + ex.Message);
             }
         }
-        
+        private bool ValidarCampos() //Validar que los txt esten completos
+        {
+            // Es necesario como minimo ingresar un Codigo y Nombre
+            if (string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Por favor, ingrese Código y Artículo");
+                return false;
+            }
+
+
+            if (string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                // Si no se ingresó un precio, establecer el precio en 0 , esto es para que no me de un error al Aceptar
+                txtPrecio.Text = "0";
+            }
+
+            return true;
+        }
+
 
         private void frmAgregar_Load(object sender, EventArgs e)
         {

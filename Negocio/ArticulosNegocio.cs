@@ -65,7 +65,6 @@ namespace Negocio
                 datos.setearParametros("@ImagenUrl", nuevo.ImagenUrl);
                 datos.setearParametros("@Precio", nuevo.Precio);
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
