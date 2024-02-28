@@ -49,7 +49,7 @@ namespace Presentacion
         }
         private void cargarImagen(string imagen)
         {
-            // por si no hay imagen en la bd, para que no falle el programa 
+            // por si no hay imagen en la bd, para que no falle el programa cargo una imagen desde la web
             try
             {
                 pbxArticulo.Load(imagen);
@@ -63,7 +63,7 @@ namespace Presentacion
         {
             dgvDatos.Columns["ImagenUrl"].Visible = false;
             dgvDatos.Columns["Id"].Visible = false;
-            
+
         }
 
         private void dgvDatos_SelectionChanged(object sender, EventArgs e)

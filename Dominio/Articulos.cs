@@ -11,7 +11,7 @@ namespace Dominio
     public class Articulos
     {
         public int Id { get; set; }
-        [DisplayName("Código")] // debe ir arriba del nombre que quiero modificar en la columna dgv
+        [DisplayName("Código")] // Configuro como se muestra el nombre de la columna, debe ir arriba del nombre que quiero modificar en la columna dgv
         public string Codigo { get; set; }
         public string Nombre { get; set; }
         [DisplayName("Descripción")]
