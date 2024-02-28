@@ -46,6 +46,8 @@ namespace Presentacion
 
                 MessageBox.Show(ex.ToString());
             }
+
+
         }
         private void cargarImagen(string imagen)
         {
@@ -73,6 +75,13 @@ namespace Presentacion
                 Articulos seleccionado = (Articulos)dgvDatos.CurrentRow.DataBoundItem;
                 cargarImagen(seleccionado.ImagenUrl);
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregar alta = new frmAgregar();
+            alta.ShowDialog();
+            cargar();
         }
     }
 }
