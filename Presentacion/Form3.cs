@@ -29,6 +29,15 @@ namespace Presentacion
             cboCampo.Items.Add("Categoría");
             cboCampo.SelectedIndex = 0; // con esto preselecciono el primero elemento del combo box
             cboCriterio.SelectedIndex = 0;
+            cboOrdenCampo.Items.Add("Código");
+            cboOrdenCampo.Items.Add("Marca");
+            cboOrdenCampo.Items.Add("Categoría");
+            cboOrdenCampo.Items.Add("Precio");
+            cboOrdenCampo.SelectedIndex = 0;
+            cboOrdenCriterio.Items.Add("Ascendente");
+            cboOrdenCriterio.Items.Add("Descendente");
+            cboOrdenCriterio.SelectedIndex = 0;
+
         }
         private void cargar()
         {
@@ -147,6 +156,25 @@ namespace Presentacion
                     return false;
             }
             return true;
+        }
+
+        private void btnOrdenar_Click(object sender, EventArgs e)
+        {
+            ArticulosNegocio negocio = new ArticulosNegocio();
+            try
+            {
+
+                string campo = cboOrdenCampo.SelectedItem.ToString();
+                string criterio = cboOrdenCriterio.SelectedItem.ToString();
+
+                dgvDatosAvanzados.DataSource = negocio.ordenar(campo, criterio);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+               // MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
