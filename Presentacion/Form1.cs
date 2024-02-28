@@ -49,7 +49,7 @@ namespace Presentacion
 
 
         }
-        private void cargarImagen(string imagen)
+        public void cargarImagen(string imagen)
         {
             // por si no hay imagen en la bd, para que no falle el programa cargo una imagen desde la web
             try

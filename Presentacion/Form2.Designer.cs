@@ -44,6 +44,8 @@
             this.cboCategoria = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.pbxArticuloAgregar = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticuloAgregar)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCodigo
@@ -122,6 +124,7 @@
             this.txtImagenUrl.Name = "txtImagenUrl";
             this.txtImagenUrl.Size = new System.Drawing.Size(100, 20);
             this.txtImagenUrl.TabIndex = 11;
+            this.txtImagenUrl.Leave += new System.EventHandler(this.txtImagenUrl_Leave);
             // 
             // lblImagenUrl
             // 
@@ -188,11 +191,21 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // pbxArticuloAgregar
+            // 
+            this.pbxArticuloAgregar.Location = new System.Drawing.Point(212, 74);
+            this.pbxArticuloAgregar.Name = "pbxArticuloAgregar";
+            this.pbxArticuloAgregar.Size = new System.Drawing.Size(193, 176);
+            this.pbxArticuloAgregar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbxArticuloAgregar.TabIndex = 18;
+            this.pbxArticuloAgregar.TabStop = false;
+            // 
             // frmAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 324);
+            this.Controls.Add(this.pbxArticuloAgregar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cboCategoria);
@@ -210,8 +223,10 @@
             this.Controls.Add(this.txtCodigo);
             this.Controls.Add(this.lblCodigo);
             this.Name = "frmAgregar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Articulo";
             this.Load += new System.EventHandler(this.frmAgregar_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticuloAgregar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +250,6 @@
         private System.Windows.Forms.ComboBox cboCategoria;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.PictureBox pbxArticuloAgregar;
     }
 }

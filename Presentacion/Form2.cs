@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using Negocio;
 using Dominio;
 
+
 namespace Presentacion
 {
     public partial class frmAgregar : Form
@@ -104,7 +105,22 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-
+        private void cargarImagen(string imagen)
+        {
+            // por si no hay imagen en la bd, para que no falle el programa 
+            try
+            {
+                pbxArticuloAgregar.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                pbxArticuloAgregar.Load("https://imgs.search.brave.com/Jp6ngmaC-F_2y5_7UN2IF8HtgALS20IY1-qn-o5x8EA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzI5LzQyLzQy/LzM2MF9GXzQyOTQy/NDI3OV9kb2tFRndu/U29KZU9LcHF2VjF0/dFh1bThwaUVTc0Y1/TC5qcGc");
+            }
+        }
+        private void txtImagenUrl_Leave(object sender, EventArgs e) // Con este evento, cuando salgo del txt cargo la imagen en el pbx
+        {
+            cargarImagen(txtImagenUrl.Text);
+        }
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo números, coma y backspace
@@ -119,5 +135,7 @@ namespace Presentacion
                 e.Handled = true;
             }
         }
+
+
     }
 }
