@@ -21,6 +21,12 @@ namespace Presentacion
         {
             InitializeComponent();
         }
+        public frmAgregar(Articulos articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Pokemon";
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -36,7 +42,9 @@ namespace Presentacion
                     return;
                 }
                 ArticulosNegocio articulosNegocio = new ArticulosNegocio();
-                articulo = new Articulos();
+                
+                if (articulo == null) // si llego aca y esta nulo es porque toque modificar sino es agregar
+                    articulo = new Articulos();
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
@@ -45,8 +53,16 @@ namespace Presentacion
                 articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
 
-                articulosNegocio.agregar(articulo);
-                MessageBox.Show("Artículo agregado exitosamente");
+                if (articulo.Id != 0)
+                {
+                    articulosNegocio.modificar(articulo);
+                    MessageBox.Show("Modificado Exitosamente");
+                }
+                else
+                {
+                    articulosNegocio.agregar(articulo);
+                    MessageBox.Show("Agregado Exitosamente");
+                }
                 Close();
 
             }
@@ -88,16 +104,17 @@ namespace Presentacion
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
 
-                /* if (pokemon != null) //precargar pokemon en el modificar
-                 {
-                     txtNumero.Text = pokemon.Numero.ToString();
-                     txtNombre.Text = pokemon.Nombre;
-                     txtDescripcion.Text = pokemon.Descripcion;
-                     txtUrlImagen.Text = pokemon.UrlImagen;
-                     cargarImagen(pokemon.UrlImagen);
-                     cboTipo.SelectedValue = pokemon.Tipo.Id;
-                     cboDebilidad.SelectedValue = pokemon.Debilidad.Id;
-                 }*/
+                if (articulo != null) //precargar articulo en el modificar
+                {
+                    txtCodigo.Text = articulo.Codigo.ToString();
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtImagenUrl.Text = articulo.ImagenUrl;
+                    cargarImagen(articulo.ImagenUrl);
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                }
             }
             catch (Exception ex)
             {
