@@ -51,6 +51,7 @@ namespace Presentacion
         {
             dgvDatos.Columns["ImagenUrl"].Visible = false;
             dgvDatos.Columns["Id"].Visible = false;
+            
         }
     }
 }
