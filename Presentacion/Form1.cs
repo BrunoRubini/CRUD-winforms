@@ -110,14 +110,46 @@ namespace Presentacion
                 if (respuesta == DialogResult.Yes)
                 {
                     negocio.eliminar(seleccionado.Id);
+                    MessageBox.Show("Eliminado Correctamente");
                     cargar();
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void txtBuscarArticulo_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscarArticulo.Text == "Buscar Artículo")
+                txtBuscarArticulo.Text = "";
+        }
+
+        private void txtBuscarArticulo_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulos> listaFiltrada;
+            string filtro = txtBuscarArticulo.Text;
+            if (filtro.Length >= 3)
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+            dgvDatos.DataSource = null;
+            dgvDatos.DataSource = listaFiltrada;
+            ocultarColumnas();
+        }
+
+        private void btnAvanzados_Click(object sender, EventArgs e)
+        {
+            frmAvanzado avanzado = new frmAvanzado();
+            avanzado.ShowDialog();
+            cargar();
+        }
+
+        
     }
 }

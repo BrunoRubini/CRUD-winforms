@@ -46,7 +46,7 @@ namespace Presentacion
 
                 if (articulo == null) // si llego aca y esta nulo es porque toque modificar sino es agregar
                     articulo = new Articulos();
-                articulo.Codigo = txtCodigo.Text;
+                articulo.Codigo = txtCodigo1.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.ImagenUrl = txtImagenUrl.Text;
@@ -75,7 +75,7 @@ namespace Presentacion
         private bool ValidarCampos() //Validar que los txt esten completos
         {
             // Es necesario como minimo ingresar un Codigo y Nombre
-            if (string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtNombre.Text))
+            if (string.IsNullOrEmpty(txtCodigo1.Text) || string.IsNullOrEmpty(txtNombre.Text))
             {
                 MessageBox.Show("Por favor, ingrese Código y Artículo");
                 return false;
@@ -107,7 +107,7 @@ namespace Presentacion
 
                 if (articulo != null) //precargar articulo en el modificar
                 {
-                    txtCodigo.Text = articulo.Codigo.ToString();
+                    txtCodigo1.Text = articulo.Codigo.ToString();
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtImagenUrl.Text = articulo.ImagenUrl;
@@ -154,6 +154,6 @@ namespace Presentacion
             }
         }
 
-
+        
     }
 }
