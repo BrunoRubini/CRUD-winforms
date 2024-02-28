@@ -21,11 +21,12 @@ namespace Presentacion
         {
             InitializeComponent();
         }
-        public frmAgregar(Articulos articulo)
+        public frmAgregar(Articulos articulo) //Con este constructor sobrecargado creo la ventana
+                                              //para modificar un articulo, ya que uso el mismo form de agregar
         {
             InitializeComponent();
             this.articulo = articulo;
-            Text = "Modificar Pokemon";
+            Text = "Modificar Articulo";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -42,7 +43,7 @@ namespace Presentacion
                     return;
                 }
                 ArticulosNegocio articulosNegocio = new ArticulosNegocio();
-                
+
                 if (articulo == null) // si llego aca y esta nulo es porque toque modificar sino es agregar
                     articulo = new Articulos();
                 articulo.Codigo = txtCodigo.Text;
