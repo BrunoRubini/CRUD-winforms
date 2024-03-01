@@ -22,51 +22,39 @@ namespace Presentacion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
             cargar();
-
             dgvDatos.Columns["Precio"].DefaultCellStyle.Format = "N2"; // formatear precio a 2 decimales
-
-
         }
-        private void cargar()
+        private void cargar() // Cargar el dataGridView principal
         {
-            //Data grid view para poder ver las tablas que traje
             ArticulosNegocio negocio = new ArticulosNegocio();
             try
             {
                 listaArticulos = negocio.listar();
                 dgvDatos.DataSource = listaArticulos;
                 ocultarColumnas();
-                //cargarImagen(listaArticulos[0].ImagenUrl);
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }
-
-
         }
-       
+
         private void ocultarColumnas()
         {
             dgvDatos.Columns["ImagenUrl"].Visible = false;
             dgvDatos.Columns["Id"].Visible = false;
 
         }
-
-       
-
-        private void btnAgregar_Click(object sender, EventArgs e)
+        
+        private void btnAgregarPrincipal_Click(object sender, EventArgs e) // Botón de Agregar, abre el formulario de agregar artículo 
         {
             frmAgregar alta = new frmAgregar();
             alta.ShowDialog();
             cargar();
         }
-
-        private void btnModificar_Click(object sender, EventArgs e)
+        private void btnModificarPrincipal_Click(object sender, EventArgs e) // Botón de Modificar, abre el formulario de modificar artículo
         {
             Articulos seleccionado;
             seleccionado = (Articulos)dgvDatos.CurrentRow.DataBoundItem;
@@ -75,16 +63,22 @@ namespace Presentacion
             modificar.ShowDialog();
             cargar();
         }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminarPrincipal_Click(object sender, EventArgs e)// Botón de Eliminar
         {
             eliminar();
         }
-        private void eliminar()
+
+        private void btnAvanzadosPrincipal_Click(object sender, EventArgs e)// Abrir formulario Avanzado
+        {
+            frmAvanzado avanzado = new frmAvanzado();
+            avanzado.ShowDialog();
+            cargar();
+        }
+        private void eliminar() // Funcion para Seleccionar el artículo , preguntar y luego llamar a la método eliminar pasando su seleccionado.Id como parámetro
         {
             ArticulosNegocio negocio = new ArticulosNegocio();
             Articulos seleccionado;
-            seleccionado = (Articulos)dgvDatos.CurrentRow.DataBoundItem;
+            seleccionado = (Articulos)dgvDatos.CurrentRow.DataBoundItem; // Tomo el artículo seleccionado en ese momento en el dgv
             try
             {
                 DialogResult respuesta = MessageBox.Show($"Atención, desea eliminar permanentemente el artículo: \nCódigo: {seleccionado.Codigo} \nNombre: {seleccionado.Nombre}", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -101,15 +95,12 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void txtBuscarArticulo_Enter(object sender, EventArgs e)
+        private void txtBuscarArticulo_Enter(object sender, EventArgs e) // Cambia el texto de fondo del textBox
         {
             if (txtBuscarArticulo.Text == "Ingrese nombre, marca o categoría")
                 txtBuscarArticulo.Text = "";
         }
-        
-
-        private void txtBuscarArticulo_TextChanged(object sender, EventArgs e)
+        private void txtBuscarArticulo_TextChanged(object sender, EventArgs e) // Filtra la lista mientras escribo, es un filtro rápido
         {
             List<Articulos> listaFiltrada;
             string filtro = txtBuscarArticulo.Text;
@@ -125,14 +116,6 @@ namespace Presentacion
             dgvDatos.DataSource = listaFiltrada;
             ocultarColumnas();
         }
-
-        private void btnAvanzados_Click(object sender, EventArgs e)
-        {
-            frmAvanzado avanzado = new frmAvanzado();
-            avanzado.ShowDialog();
-            cargar();
-        }
-
         
     }
 }
