@@ -54,7 +54,6 @@ namespace Negocio
                 throw ex;
             }
         }
-
         public void setearParametros(string nombre, object valor)
         {
             comando.Parameters.AddWithValue(nombre, valor);
