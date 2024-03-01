@@ -28,13 +28,38 @@ namespace Presentacion
             this.articulo = articulo;
             Text = "Modificar Articulo";
         }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void frmAgregar_Load(object sender, EventArgs e)
         {
-            Close();
-        }
+            MarcasNegocio marcasNegocio = new MarcasNegocio();
+            CategoriasNegocio categoriasNegocio = new CategoriasNegocio();
+            try
+            {
+                cboMarca.DataSource = marcasNegocio.listar();
+                cboMarca.ValueMember = "Id";
+                cboMarca.DisplayMember = "Descripcion";
+                cboCategoria.DataSource = categoriasNegocio.listar();
+                cboCategoria.ValueMember = "Id";
+                cboCategoria.DisplayMember = "Descripcion";
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+                if (articulo != null) //precargar articulo en el modificar
+                {
+                    txtCodigo1.Text = articulo.Codigo.ToString();
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtImagenUrl.Text = articulo.ImagenUrl;
+                    cargarImagen(articulo.ImagenUrl);
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void btnAceptarAgregarArt_Click(object sender, EventArgs e)// Botón Aceptar de la ventana de agregar artículos
         {
             try
             {
@@ -72,6 +97,12 @@ namespace Presentacion
                 MessageBox.Show("Ha ocurrido un error: " + ex.Message);
             }
         }
+
+        private void btnCancelarAgregadoArt_Click(object sender, EventArgs e)// Botón Cancelar de la ventana agregar artículos
+        {
+            Close();
+        }
+
         private bool ValidarCampos() //Validar que los txt esten completos
         {
             // Es necesario como minimo ingresar un Codigo y Nombre
@@ -90,39 +121,6 @@ namespace Presentacion
 
             return true;
         }
-
-
-        private void frmAgregar_Load(object sender, EventArgs e)
-        {
-            MarcasNegocio marcasNegocio = new MarcasNegocio();
-            CategoriasNegocio categoriasNegocio = new CategoriasNegocio();
-            try
-            {
-                cboMarca.DataSource = marcasNegocio.listar();
-                cboMarca.ValueMember = "Id";
-                cboMarca.DisplayMember = "Descripcion";
-                cboCategoria.DataSource = categoriasNegocio.listar();
-                cboCategoria.ValueMember = "Id";
-                cboCategoria.DisplayMember = "Descripcion";
-
-                if (articulo != null) //precargar articulo en el modificar
-                {
-                    txtCodigo1.Text = articulo.Codigo.ToString();
-                    txtNombre.Text = articulo.Nombre;
-                    txtDescripcion.Text = articulo.Descripcion;
-                    txtImagenUrl.Text = articulo.ImagenUrl;
-                    cargarImagen(articulo.ImagenUrl);
-                    cboMarca.SelectedValue = articulo.Marca.Id;
-                    cboCategoria.SelectedValue = articulo.Categoria.Id;
-                    txtPrecio.Text = articulo.Precio.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.ToString());
-            }
-        }
         private void cargarImagen(string imagen)
         {
             // por si no hay imagen en la bd, para que no falle el programa 
@@ -139,7 +137,7 @@ namespace Presentacion
         {
             cargarImagen(txtImagenUrl.Text);
         }
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e) // Permito sólo números y una "," en el txt del Precio
         {
             // Permitir solo números, coma y backspace
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
@@ -154,6 +152,6 @@ namespace Presentacion
             }
         }
 
-       
+
     }
 }

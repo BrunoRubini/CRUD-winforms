@@ -42,9 +42,9 @@
             this.lblPrecio = new System.Windows.Forms.Label();
             this.cboMarca = new System.Windows.Forms.ComboBox();
             this.cboCategoria = new System.Windows.Forms.ComboBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.pbxArticuloAgregar = new System.Windows.Forms.PictureBox();
+            this.btnAceptarAgregarArt = new Guna.UI2.WinForms.Guna2Button();
+            this.btnCancelarAgregadoArt = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticuloAgregar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,7 +148,6 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 20);
             this.txtPrecio.TabIndex = 13;
-            
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // lblPrecio
@@ -179,26 +178,6 @@
             this.cboCategoria.Size = new System.Drawing.Size(99, 21);
             this.cboCategoria.TabIndex = 15;
             // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(40, 282);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 16;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(135, 282);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 17;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // pbxArticuloAgregar
             // 
             this.pbxArticuloAgregar.Location = new System.Drawing.Point(212, 74);
@@ -208,15 +187,47 @@
             this.pbxArticuloAgregar.TabIndex = 18;
             this.pbxArticuloAgregar.TabStop = false;
             // 
+            // btnAceptarAgregarArt
+            // 
+            this.btnAceptarAgregarArt.BorderRadius = 11;
+            this.btnAceptarAgregarArt.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAceptarAgregarArt.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAceptarAgregarArt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAceptarAgregarArt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAceptarAgregarArt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnAceptarAgregarArt.ForeColor = System.Drawing.Color.White;
+            this.btnAceptarAgregarArt.Location = new System.Drawing.Point(94, 269);
+            this.btnAceptarAgregarArt.Name = "btnAceptarAgregarArt";
+            this.btnAceptarAgregarArt.Size = new System.Drawing.Size(134, 31);
+            this.btnAceptarAgregarArt.TabIndex = 19;
+            this.btnAceptarAgregarArt.Text = "Aceptar";
+            this.btnAceptarAgregarArt.Click += new System.EventHandler(this.btnAceptarAgregarArt_Click);
+            // 
+            // btnCancelarAgregadoArt
+            // 
+            this.btnCancelarAgregadoArt.BorderRadius = 11;
+            this.btnCancelarAgregadoArt.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelarAgregadoArt.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancelarAgregadoArt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancelarAgregadoArt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancelarAgregadoArt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnCancelarAgregadoArt.ForeColor = System.Drawing.Color.White;
+            this.btnCancelarAgregadoArt.Location = new System.Drawing.Point(245, 269);
+            this.btnCancelarAgregadoArt.Name = "btnCancelarAgregadoArt";
+            this.btnCancelarAgregadoArt.Size = new System.Drawing.Size(134, 31);
+            this.btnCancelarAgregadoArt.TabIndex = 20;
+            this.btnCancelarAgregadoArt.Text = "Cancelar";
+            this.btnCancelarAgregadoArt.Click += new System.EventHandler(this.btnCancelarAgregadoArt_Click);
+            // 
             // frmAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(473, 324);
+            this.Controls.Add(this.btnCancelarAgregadoArt);
+            this.Controls.Add(this.btnAceptarAgregarArt);
             this.Controls.Add(this.pbxArticuloAgregar);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cboCategoria);
             this.Controls.Add(this.cboMarca);
             this.Controls.Add(this.txtPrecio);
@@ -257,8 +268,8 @@
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.ComboBox cboMarca;
         private System.Windows.Forms.ComboBox cboCategoria;
-        private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.PictureBox pbxArticuloAgregar;
+        private Guna.UI2.WinForms.Guna2Button btnAceptarAgregarArt;
+        private Guna.UI2.WinForms.Guna2Button btnCancelarAgregadoArt;
     }
 }
